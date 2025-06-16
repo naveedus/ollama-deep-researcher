@@ -151,7 +151,7 @@ def fetch_raw_content(url: str) -> Optional[str]:
         return None
 
 @traceable
-def duckduckgo_search(query: str, max_results: int = 3, fetch_full_page: bool = False) -> Dict[str, List[Dict[str, Any]]]:
+def duckduckgo_search(query: str, max_results: int = 1, fetch_full_page: bool = False) -> Dict[str, List[Dict[str, Any]]]:
     """
     Search the web using DuckDuckGo and return formatted results.
     

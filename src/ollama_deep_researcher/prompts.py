@@ -4,7 +4,8 @@ from datetime import datetime
 def get_current_date():
     return datetime.now().strftime("%B %d, %Y")
 
-query_writer_instructions="""Your goal is to generate a targeted web search query.
+query_writer_instructions="""Your goal is to generate a targeted web search query, if the user query has site:https://lore.kernel.org then generate query
+along with site:https://lore.kernel.org.
 
 <CONTEXT>
 Current date: {current_date}
@@ -64,13 +65,12 @@ Think carefully about the provided Context first. Then generate a summary of the
 reflection_instructions = """You are an expert research assistant analyzing a summary about {research_topic}.
 
 <GOAL>
-1. Identify knowledge gaps or areas that need deeper exploration
-2. Generate a follow-up question that would help expand your understanding
-3. Focus on technical details, implementation specifics, or emerging trends that weren't fully covered
+1. restrict the summary to code discussions
+2. restrict the search references only site:https://lore.kernel.org.
 </GOAL>
 
 <REQUIREMENTS>
-Ensure the follow-up question is self-contained and includes necessary context for web search.
+Ensure the follow-up question is self-contained and includes necessary context restricted discussions on site:https://lore.kernel.org for web search.
 </REQUIREMENTS>
 
 <FORMAT>
@@ -82,8 +82,8 @@ Format your response as a JSON object with these exact keys:
 <Task>
 Reflect carefully on the Summary to identify knowledge gaps and produce a follow-up query. Then, produce your output following this JSON format:
 {{
-    "knowledge_gap": "The summary lacks information about performance metrics and benchmarks",
-    "follow_up_query": "What are typical performance benchmarks and metrics used to evaluate [specific technology]?"
+    "knowledge_gap": "if summary lacks information about missing strings from the generated query",
+    "follow_up_query": "perform search using site:https://lore.kernel.org on top 3 missing strings."
 }}
 </Task>
 
